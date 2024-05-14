@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
@@ -9,7 +9,7 @@ import Messages from './components/messages';
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-between p-20">
+    <main className="flex flex-col items-center justify-between m-12">
       <div className="flex gap-2 items-center">
         {/* 
       <h1 className="text-7xl">
@@ -33,24 +33,29 @@ export default function Home() {
        */}
       </div>
 
-      <h2 className="mt-8 text-2xl">
+      <h2 className="mt-3 text-2xl">
         The on-chain message board for DeFiChain
       </h2>
-      <Link href="/about" className="mt-4">
-        Go to About
-      </Link>
+      <div className='m-4 max-w-lg flex gap-8'>
+        <Link href="/about">
+          About
+        </Link>
+        <Link href="/about">
+          Contract
+        </Link>
+        <Link href="/about">
+          Source
+        </Link>
+      </div>
 
       <Suspense fallback={<LoadingIndicator />}>
         <Messages />
       </Suspense>
 
       <Textarea
-        className="mt-8"
+        className="mt-8 max-w-lg"
         placeholder="Tell us what's on your mind" />
       <Button className="mt-4">
-        CLICK
-      </Button>
-      <Button className="mt-4 bg-secondary">
         CLICK
       </Button>
     </main>
