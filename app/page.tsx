@@ -1,13 +1,14 @@
 import React, { Suspense } from 'react';
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
 import Image from 'next/image';
 import icon from "@/public/icon.svg";
 import LoadingIndicator from '../components/loading-indicator';
 import Messages from './components/messages';
+import SendMessage from './components/send-message';
 
 export default function Home() {
+  const contractLink = "https://meta.defiscan.live/address/" + "0x6Fa51D65A277EAd4FC3aC08564F62D07408f1F57"
+
   return (
     <main className="flex flex-col items-center justify-between m-12">
       <div className="flex gap-2 items-center">
@@ -40,10 +41,10 @@ export default function Home() {
         <Link href="/about">
           About
         </Link>
-        <Link href="/about">
+        <Link target='_blank' href={contractLink}>
           Contract
         </Link>
-        <Link href="/about">
+        <Link href="/source">
           Source
         </Link>
       </div>
@@ -52,12 +53,7 @@ export default function Home() {
         <Messages />
       </Suspense>
 
-      <Textarea
-        className="mt-8 max-w-lg"
-        placeholder="Tell us what's on your mind" />
-      <Button className="mt-4">
-        CLICK
-      </Button>
+      <SendMessage />
     </main>
   );
 }

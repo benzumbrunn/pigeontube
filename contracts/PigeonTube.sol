@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0
-
-pragma solidity >=0.8.2 <0.9.0;
+pragma solidity 0.8.20;
 
 contract PigeonTube {
     struct Message {
+        uint id;
         string text;
         address author;
         uint blockSubmitted;
@@ -15,10 +15,12 @@ contract PigeonTube {
     Message[] public messages;
     address payable public previousHighestAddress;
     uint public previousHighestAmount;
+    uint public messageCount;
 
     constructor() {
         previousHighestAddress = payable(msg.sender);
         previousHighestAmount = 0;
+        messageCount = 0;
     }
 
     function getMessages() public view returns (Message[] memory) {
@@ -30,6 +32,7 @@ contract PigeonTube {
         assert(msg.value > previousHighestAmount); // only accept messages of higher value than the previous sender
 
         Message memory message = Message({
+            id: messageCount++,
             text: incomingText,
             author: msg.sender,
             blockSubmitted: block.number,
@@ -48,6 +51,7 @@ contract PigeonTube {
     function sendMessage(string calldata message) public {
         messages.push(
             Message({
+                id: messageCount++,
                 text: message,
                 author: msg.sender,
                 blockSubmitted: block.number,

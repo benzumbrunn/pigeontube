@@ -1,9 +1,9 @@
 import Web3 from 'web3';
 import { Card, CardContent, CardFooter, CardHeader } from '../../components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { MessageWithId } from '@/types/message.type';
+import { MessageObject } from '@/types/message.type';
 
-export default function Message({ message, highlight }: { message: MessageWithId, highlight?: boolean }) {
+export default function Message({ message, highlight }: { message: MessageObject, highlight?: boolean }) {
   const value = Web3.utils.fromWei(message.valueSent, "ether");
   const displayValue = value === '0.' ? null : value;
 
