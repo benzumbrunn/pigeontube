@@ -38,7 +38,7 @@ export default async function Messages() {
       <Message message={highestValueMessage} highlight>
       </Message>
       <div>
-        {(otherMessages as MessageObject[]).map((message, index) =>
+        {(otherMessages as MessageObject[]).map((message) =>
           <Message message={message} key={message.id.toString()}>
           </Message>
         )}
