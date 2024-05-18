@@ -5,7 +5,7 @@ import Message from './message';
 import { MessageObject } from '@/types/message.type';
 
 export default async function Messages() {
-  let data: MessageObject[];
+  let data: MessageObject[] | undefined;
 
   try {
     const web3 = new Web3(new Web3.providers.HttpProvider(config.RPC_PROVIDER));
