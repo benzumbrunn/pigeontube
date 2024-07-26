@@ -6,6 +6,9 @@ import abi from '../../contracts/PigeonTube.json' assert {type: 'json'};
 import { config } from '@/config';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
+import { Toaster } from '@/components/ui/toaster';
+import { useToast } from '@/components/ui/use-toast';
 
 declare global {
   interface Window { ethereum: any; web3: Web3; }
@@ -14,6 +17,8 @@ declare global {
 export default function SendMessage() {
   const [message, setMessage] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const { toast } = useToast()
+
 
   const ethEnabled = async () => {
     if (window.ethereum) {
@@ -45,11 +50,16 @@ export default function SendMessage() {
       const contract = new window.web3.eth.Contract(abi, contractAddress);
       const accounts = await window.web3.eth.getAccounts();
       await contract.methods.sendMessage(message).send({ from: accounts[0] });
+      console.log(accounts);
 
       setMessage('');
-    } catch (error) {
-        console.error(error);
-        setDisabled(false);
+    } catch (error: any) {
+      toast({
+        title: 'An error occurred', // TODO: 
+        description: error.message,
+        variant: 'destructive'
+      });
+      setDisabled(false);
     }
   };
 
@@ -60,9 +70,15 @@ export default function SendMessage() {
         onChange={handleTextChange}
         className="mt-8 max-w-lg"
         placeholder="What's on your mind?" />
+      <Input
+        type='number'
+        className='mt-4 max-w-xs'
+        placeholder='DFI value (optional)'
+      />
       <Button onClick={handleClick} disabled={message.length === 0 || disabled} className="mt-4">
         Send
       </Button>
+      <Toaster />
     </>
   );
 }

@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+Disallow:
+Sitemap: https://pigeon.tube/sitemap.xml
