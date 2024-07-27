@@ -19,7 +19,6 @@ export default function SendMessage() {
   const [disabled, setDisabled] = useState(true);
   const { toast } = useToast()
 
-
   const ethEnabled = async () => {
     if (window.ethereum) {
       await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -42,10 +41,29 @@ export default function SendMessage() {
   const handleClick = async () => {
     setDisabled(true);
 
-    try {
-      await ethEnabled();
-      // TODO: handle if not available and move wallet connection out of component
+    const walletAvailable = await ethEnabled();
+    if (!walletAvailable) {
+      toast({
+        title: 'No wallet detected',
+        description: 'Please install MetaMask to interact with the contract.',
+        variant: 'destructive'
+      });
+      setDisabled(false);
+      return;
+    }
 
+    const chainId = (await window.web3.eth.getChainId()).toString();
+    if (chainId !== '1130') {
+      toast({
+        title: 'Unsupported network',
+        description: 'Configured network is not DeFiCHain MetaChain mainnet.',
+        variant: 'destructive'
+      });
+      setDisabled(false);
+      return;
+    }
+
+    try {
       const contractAddress = config.CONTRACT_ADDRESS;
       const contract = new window.web3.eth.Contract(abi, contractAddress);
       const accounts = await window.web3.eth.getAccounts();
@@ -55,13 +73,13 @@ export default function SendMessage() {
       setMessage('');
     } catch (error: any) {
       toast({
-        title: 'An error occurred', // TODO: 
+        title: 'An error occurred',
         description: error.message,
         variant: 'destructive'
       });
       setDisabled(false);
     }
-  };
+  }
 
   return (
     <>
