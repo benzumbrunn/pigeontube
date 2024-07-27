@@ -35,7 +35,7 @@ export default function Message({ message, highlight }: { message: MessageObject
       </span>
     </CardContent>
     <CardFooter>
-      <div className='font-light'>
+      <div className='font-light text-sm'>
         {message.author}
       </div>
     </CardFooter>

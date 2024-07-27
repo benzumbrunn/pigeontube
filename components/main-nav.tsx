@@ -10,19 +10,19 @@ export default function MainNav() {
 
   return (
      <div className="flex flex-col items-center justify-between">
-      <div className="flex gap-4 items-center">
-        <h1 className="text-7xl">
+      <div className="flex gap-1 md:gap-4 items-center">
+        <h1 className="text-5xl md:text-7xl">
           Pigeon Tube
         </h1>
         <Image
-          width={100}
+          className='w-12 md:w-24'
           priority
           src={icon}
           alt="pigeon.tube logo"
         />
       </div>
 
-      <h2 className="mt-3 text-2xl">
+      <h2 className="mt-3 text-xl md:text-2xl text-center">
         The on-chain billboard on DeFiChain MetaChain
       </h2>
       <div className='m-4 max-w-lg flex gap-8'>
