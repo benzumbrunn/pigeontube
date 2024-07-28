@@ -1,5 +1,3 @@
-export const config = {
-  CONTRACT_ADDRESS: process.env.NODE_ENV === 'production' ? process.env.CONTRACT_ADDRESS : require('./config.local').CONTRACT_ADDRESS,
-  RPC_PROVIDER: process.env.NODE_ENV === 'production' ? process.env.RPC_PROVIDER : require('./config.local').RPC_PROVIDER,
-  GA_ID: process.env.NODE_ENV === 'production' ? process.env.GA_ID : require('./config.local').GA_ID,
-}
+export const CONTRACT_ADDRESS = '0x6Fa51D65A277EAd4FC3aC08564F62D07408f1F57';
+export const RPC_PROVIDER = 'https://dmc.mydefichain.com/mainnet';
+export const GA_ID = 'G-9453YNTPG4';
