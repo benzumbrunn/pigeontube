@@ -66,9 +66,9 @@ export default function SendMessage() {
     try {
       const contractAddress = config.CONTRACT_ADDRESS;
       const contract = new window.web3.eth.Contract(abi, contractAddress);
+      console.log(contract.options.address);
       const accounts = await window.web3.eth.getAccounts();
       await contract.methods.sendMessage(message).send({ from: accounts[0] });
-      console.log(accounts);
 
       setMessage('');
     } catch (error: any) {
@@ -86,6 +86,7 @@ export default function SendMessage() {
       <Textarea
         value={message}
         onChange={handleTextChange}
+        onPaste={handleTextChange}
         className="mt-8 max-w-lg"
         placeholder="What's on your mind?" />
       <Input
