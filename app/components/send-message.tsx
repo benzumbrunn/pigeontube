@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Web3 from 'web3';
 import abi from '../../contracts/PigeonTube.json' assert {type: 'json'};
-import { config } from '@/config';
+import { CONTRACT_ADDRESS } from '@/config';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
@@ -64,7 +64,7 @@ export default function SendMessage() {
     }
 
     try {
-      const contractAddress = config.CONTRACT_ADDRESS;
+      const contractAddress = CONTRACT_ADDRESS;
       const contract = new window.web3.eth.Contract(abi, contractAddress);
       console.log(contract.options.address);
       const accounts = await window.web3.eth.getAccounts();

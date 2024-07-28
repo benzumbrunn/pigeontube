@@ -2,10 +2,10 @@ import React from 'react';
 import Link from "next/link";
 import Image from 'next/image';
 import icon from "@/public/icon.svg";
-import { config } from '@/config';
+import { CONTRACT_ADDRESS } from '@/config';
 
 export default function MainNav() {
-  const contractLink = "https://meta.defiscan.live/address/" + config.CONTRACT_ADDRESS;
+  const contractLink = "https://meta.defiscan.live/address/" + CONTRACT_ADDRESS;
   const sourceLink = "https://github.com/benzumbrunn/pigeon"; // TODO: make public
 
   return (

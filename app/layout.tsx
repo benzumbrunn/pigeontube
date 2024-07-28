@@ -2,7 +2,7 @@ import { Urbanist } from "next/font/google";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import "./globals.css";
 import MainNav from "@/components/main-nav";
-import { config } from '@/config';
+import { GA_ID } from '@/config';
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -37,7 +37,7 @@ export default function RootLayout({
           {children}
         </main>
       </body>
-      <GoogleAnalytics gaId={config.GA_ID} />
+      <GoogleAnalytics gaId={GA_ID} />
     </html>
   );
 }
