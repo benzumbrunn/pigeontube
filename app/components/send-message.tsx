@@ -31,7 +31,7 @@ export default function SendMessage() {
   const handleTextChange = (event: any) => {
     setMessage(event.target.value);
 
-    if (message.length > 0) {
+    if (event.target.value.length > 0) {
       setDisabled(false);
     } else {
       setDisabled(true);
