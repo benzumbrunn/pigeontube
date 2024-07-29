@@ -12,11 +12,11 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <React.Fragment>
+      <SendMessage />
+
       <Suspense fallback={<LoadingIndicator />}>
         <Messages />
       </Suspense>
-
-      <SendMessage />
     </React.Fragment>
   );
 }

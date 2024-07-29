@@ -8,11 +8,12 @@ export default function Message({ message, highlight }: { message: MessageObject
   const displayValue = value === '0.' ? null : value;
 
   const commonCss = "mt-2 pt-0 border-l-8 max-w-lg ";
+  const displayValueBadgeVariant: any = highlight ? 'secondary' : ''
 
   let className = commonCss;
 
   if (highlight) {
-    className = className.concat("border-primary border-r-4 border-t-2 border-b-2");
+    className = className.concat("border-primary border-r-4 border-t-2 border-b-2 border-secondary");
   }
   else if (displayValue) {
     className = className.concat("border-l-primary");
@@ -24,7 +25,7 @@ export default function Message({ message, highlight }: { message: MessageObject
     <CardHeader className='flex-row items-baseline justify-between'>
       <Badge variant={'outline'}>#{message.id}</Badge>
       {
-        displayValue && <Badge className=''>
+        displayValue && <Badge variant={displayValueBadgeVariant}>
           {displayValue} DFI
         </Badge>
       }

@@ -16,6 +16,7 @@ declare global {
 
 export default function SendMessage() {
   const [message, setMessage] = useState('');
+  const [coinValue, setCoinValue] = useState('');
   const [disabled, setDisabled] = useState(true);
   const { toast } = useToast()
 
@@ -36,6 +37,10 @@ export default function SendMessage() {
     } else {
       setDisabled(true);
     }
+  };
+
+  const handleCoinValueChange = (event: any) => {
+    setCoinValue(event.target.value);
   };
 
   const handleClick = async () => {
@@ -67,15 +72,23 @@ export default function SendMessage() {
       const contractAddress = CONTRACT_ADDRESS;
       const contract = new window.web3.eth.Contract(abi, contractAddress);
       const accounts = await window.web3.eth.getAccounts();
-      await contract.methods.sendMessage(message).send({ from: accounts[0] });
+      const coinValueInWei = window.web3.utils.toWei(coinValue, 'ether');
+
+      if (coinValue) {
+        await contract.methods.sendMessageWithValue(message).send({ from: accounts[0], value: coinValueInWei });
+      } else {
+        await contract.methods.sendMessage(message).send({ from: accounts[0] });
+      }
 
       setMessage('');
+      setCoinValue('');
     } catch (error: any) {
       toast({
         title: 'An error occurred',
         description: error.message,
         variant: 'destructive'
       });
+    } finally {
       setDisabled(false);
     }
   }
@@ -86,17 +99,20 @@ export default function SendMessage() {
         value={message}
         onChange={handleTextChange}
         onPaste={handleTextChange}
-        className="mt-8 max-w-lg"
+        className="mt-4 max-w-lg"
         placeholder="What's on your mind?" />
-      <Input
-        type='number'
-        className='mt-4 max-w-xs'
-        placeholder='DFI value (optional)'
-      />
-      <Button onClick={handleClick} disabled={message.length === 0 || disabled} className="mt-4">
-        Send
-      </Button>
-      <Toaster />
+      <div className='flex pb-6 mt-4 gap-4 flex-grow'>
+        <Input
+          value={coinValue}
+          onChange={handleCoinValueChange}
+          type='number'
+          placeholder='DFI value (optional)'
+        />
+        <Button onClick={handleClick} disabled={message.length === 0 || disabled}>
+          Send
+        </Button>
+        <Toaster />
+      </div>
     </>
   );
 }

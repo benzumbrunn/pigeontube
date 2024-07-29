@@ -45,14 +45,14 @@ export default function Messages() {
 
   return (
     <>
-      <Message message={highestValueMessage} highlight>
-      </Message>
-      <div>
+        <Message message={highestValueMessage} highlight key={highestValueMessage.id.toString()}>
+        </Message>
+      <>
         {(otherMessages as MessageObject[]).map((message) =>
           <Message message={message} key={message.id.toString()}>
           </Message>
         )}
-      </div>
+      </>
     </>
   );
 }
