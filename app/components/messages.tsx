@@ -1,10 +1,13 @@
+"use client";
+
 import Web3 from 'web3';
 import abi from '../../contracts/PigeonTube.json' assert {type: 'json'};
 import { RPC_PROVIDER, CONTRACT_ADDRESS } from '@/config';
 import Message from './message';
 import { MessageObject } from '@/types/message.type';
+import { use } from 'react';
 
-export default async function Messages() {
+async function getMessages() {
   let data: MessageObject[] | undefined;
 
   try {
@@ -16,6 +19,12 @@ export default async function Messages() {
     console.error(err);
   }
 
+  return data;
+}
+
+export default function Messages() {
+  const data = use(getMessages());
+
   if (!data) {
     return (<div>Something went wrong fetching data from the contract.</div>);
   }
@@ -26,6 +35,7 @@ export default async function Messages() {
 
   data.map((m) => m.id = Number(m.id) + 1);
   data.reverse();
+
 
   const highestValueMessage = data.reduce((prev, current) => {
     return prev && Number(prev.valueSent) > Number(current.valueSent) ? prev : current;

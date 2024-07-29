@@ -66,7 +66,6 @@ export default function SendMessage() {
     try {
       const contractAddress = CONTRACT_ADDRESS;
       const contract = new window.web3.eth.Contract(abi, contractAddress);
-      console.log(contract.options.address);
       const accounts = await window.web3.eth.getAccounts();
       await contract.methods.sendMessage(message).send({ from: accounts[0] });
 
