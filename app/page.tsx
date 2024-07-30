@@ -1,5 +1,4 @@
-import React, { Suspense } from 'react';
-import LoadingIndicator from '../components/loading-indicator';
+import React from 'react';
 import Messages from './components/messages';
 import SendMessage from './components/send-message';
 import { Metadata } from 'next';
@@ -13,7 +12,6 @@ export default function Home() {
   return (
     <React.Fragment>
       <SendMessage />
-
       <Messages />
     </React.Fragment>
   );
