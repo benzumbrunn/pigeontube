@@ -5,10 +5,10 @@ import abi from '../../contracts/PigeonTube.json' assert {type: 'json'};
 import { RPC_PROVIDER, CONTRACT_ADDRESS } from '@/config';
 import Message from './message';
 import { MessageObject } from '@/types/message.type';
-import { use } from 'react';
+import { useEffect, useState } from 'react';
 
 async function getMessages() {
-  let data: MessageObject[] | undefined;
+  let data: MessageObject[] | null = null;
 
   try {
     const web3 = new Web3(new Web3.providers.HttpProvider(RPC_PROVIDER));
@@ -17,13 +17,18 @@ async function getMessages() {
     data = await contract.methods.getMessages().call();
   } catch (err) {
     console.error(err);
+    return null;
   }
 
   return data;
 }
 
 export default function Messages() {
-  const data = use(getMessages());
+  const [data, setData] = useState<MessageObject[] | null>(null);
+
+  useEffect(() => {
+    getMessages().then((result) => setData(result));
+  }, []);
 
   if (!data) {
     return (<div>Something went wrong fetching data from the contract.</div>);
