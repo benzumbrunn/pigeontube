@@ -14,9 +14,7 @@ export default function Home() {
     <React.Fragment>
       <SendMessage />
 
-      <Suspense fallback={<LoadingIndicator />}>
-        <Messages />
-      </Suspense>
+      <Messages />
     </React.Fragment>
   );
 }

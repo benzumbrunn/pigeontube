@@ -6,32 +6,33 @@ import { RPC_PROVIDER, CONTRACT_ADDRESS } from '@/config';
 import Message from './message';
 import { MessageObject } from '@/types/message.type';
 import { useEffect, useState } from 'react';
+import LoadingIndicator from '@/components/loading-indicator';
 
 async function getMessages() {
   let data: MessageObject[] | null = null;
 
-  try {
     const web3 = new Web3(new Web3.providers.HttpProvider(RPC_PROVIDER));
     const contractAddress = CONTRACT_ADDRESS;
     const contract = new web3.eth.Contract(abi, contractAddress);
     data = await contract.methods.getMessages().call();
-  } catch (err) {
-    console.error(err);
-    return null;
-  }
 
   return data;
 }
 
 export default function Messages() {
   const [data, setData] = useState<MessageObject[] | null>(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    getMessages().then((result) => setData(result));
+    getMessages().then(result => setData(result)).catch(e => setError(e));
   }, []);
 
-  if (!data) {
+  if (error) {
     return (<div>Something went wrong fetching data from the contract.</div>);
+  }
+
+  if (!data) {
+    return (<LoadingIndicator />);
   }
 
   if (data.length === 0) {
