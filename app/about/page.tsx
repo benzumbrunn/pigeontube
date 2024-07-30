@@ -31,7 +31,7 @@ export default function About() {
         Privacy Policy
       </Subtitle>
       <p className="pt-2">
-        This site uses Google Analytics to collect information about how visitors use it. This includes pages visited, time spent on the site, approximate geographic location (country and city), browser type, and device used. The data is used to improve the website and is retained for 26 months before being automatically deleted. You can opt-out by disabling cookies in your browser or using Google&apos;s opt-out browser add-on. By using our site, you consent to this data collection. For any questions or to exercise your data rights, contact <a href="mailto:benzumbrunn@gmail.com">benzumbrunn@gmail.com</a>.
+        The website uses Plausible Analytics, a privacy-friendly analytics tool, to collect anonymous usage data. This data includes pages visited, referring websites, country of visitor, device type and browser. Plausible doesn&apos;t use cookies and doesn&apos;t collect any personal data. The information is used solely to improve the website and understand its audience better. Data is retained for 24 months.
       </p>
 
       <Subtitle>

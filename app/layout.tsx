@@ -1,8 +1,6 @@
 import { Urbanist } from "next/font/google";
-import { GoogleAnalytics } from '@next/third-parties/google'
 import "./globals.css";
 import MainNav from "@/components/main-nav";
-import { GA_ID } from '@/config';
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -28,7 +26,10 @@ export default function RootLayout({
         <meta name="twitter:image" content="https://pigeon.tube/og-image.png" />
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
         <title>Pigeon Tube - The on-chain billboard on DeFiChain MetaChain</title>
+
+        <script defer data-domain="pigeon.tube" src="https://plausible.io/js/script.js"></script>
       </head>
 
       <body className={urbanist.className}>
@@ -37,7 +38,6 @@ export default function RootLayout({
           {children}
         </main>
       </body>
-      <GoogleAnalytics gaId={GA_ID} />
     </html>
   );
 }
