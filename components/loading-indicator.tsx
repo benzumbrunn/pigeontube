@@ -3,9 +3,9 @@ import Image from "next/image";
 
 export default function LoadingIndicator() {
   return <Image
-          width={100}
-          priority
-          src={spinner}
-          alt="loading spinner"
-        />
+    width={100}
+    priority
+    src={spinner}
+    alt="loading spinner"
+  />
 }

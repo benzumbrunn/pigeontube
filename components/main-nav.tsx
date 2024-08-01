@@ -9,7 +9,7 @@ export default function MainNav() {
   const sourceLink = "https://github.com/benzumbrunn/pigeon"; // TODO: make public
 
   return (
-     <div className="flex flex-col items-center justify-between">
+    <div className="flex flex-col items-center justify-between">
       <div className="flex gap-1 md:gap-4 items-center">
         <h1 className="text-5xl md:text-7xl">
           Pigeon Tube

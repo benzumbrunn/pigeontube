@@ -18,7 +18,7 @@ export default function About() {
         Pigeon Tube gives the DeFiChain community a tool to communicate with each other directly on the DeFiChain MetaChain layer.
         <br />
         <br />
-        Make sure you have a EVM-compatible browser wallet like Metamask installed. Follow the <a className="underline" target="_blank" href="https://blog.defichain.com/how-to-transfer-dfi-from-a-defichain-wallet-to-metachain/">guide</a> to add some DFI to your wallet and make sure it&apos;s enough to interact with a smart contract. 
+        Make sure you have a EVM-compatible browser wallet like Metamask installed. Follow the <a className="underline" target="_blank" href="https://blog.defichain.com/how-to-transfer-dfi-from-a-defichain-wallet-to-metachain/">guide</a> to add some DFI to your wallet and make sure it&apos;s enough to interact with a smart contract.
         <br />
         <br />
         Type any message you want to have posted, click the send button, and it will appear on the billboard once it is mined on the blockchain.
@@ -71,7 +71,7 @@ export default function About() {
       <p className="pt-2">
         For general inquiries or feedback, contact <a className="underline" href={'mailto:benzumbrunn@gmail.com'}>benzumbrunn@gmail.com</a>
         <br />
-        Created by <a className="underline" target="_blank" href="https://benzumbrunn.com">benzumbrunn.com</a> 
+        Created by <a className="underline" target="_blank" href="https://benzumbrunn.com">benzumbrunn.com</a>
       </p>
     </main>
   );

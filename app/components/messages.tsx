@@ -1,38 +1,37 @@
-"use client";
+"use server";
 
 import Web3 from 'web3';
 import abi from '../../contracts/PigeonTube.json' assert {type: 'json'};
 import { RPC_PROVIDER, CONTRACT_ADDRESS } from '@/config';
 import Message from './message';
 import { MessageObject } from '@/types/message.type';
-import { useEffect, useState } from 'react';
-import LoadingIndicator from '@/components/loading-indicator';
+import { unstable_noStore } from 'next/cache';
 
 async function getMessages() {
   let data: MessageObject[] | null = null;
 
-    const web3 = new Web3(new Web3.providers.HttpProvider(RPC_PROVIDER));
-    const contractAddress = CONTRACT_ADDRESS;
-    const contract = new web3.eth.Contract(abi, contractAddress);
-    data = await contract.methods.getMessages().call();
+  const web3 = new Web3(new Web3.providers.HttpProvider(RPC_PROVIDER));
+  const contractAddress = CONTRACT_ADDRESS;
+  const contract = new web3.eth.Contract(abi, contractAddress);
+  data = await contract.methods.getMessages().call();
 
   return data;
 }
 
-export default function Messages() {
-  const [data, setData] = useState<MessageObject[] | null>(null);
-  const [error, setError] = useState(null);
+export default async function Messages() {
+  unstable_noStore();
 
-  useEffect(() => {
-    getMessages().then(result => setData(result)).catch(e => setError(e));
-  }, []);
+  let data: MessageObject[] | null = null;
+  let error;
 
-  if (error) {
-    return (<div>Something went wrong fetching data from the contract.</div>);
+  try {
+    data = await getMessages();
+  } catch (err) {
+    error = err;
   }
 
-  if (!data) {
-    return (<LoadingIndicator />);
+  if (error || !data) {
+    return (<div>Something went wrong fetching data from the contract.</div>);
   }
 
   if (data.length === 0) {
@@ -51,8 +50,8 @@ export default function Messages() {
 
   return (
     <>
-        <Message message={highestValueMessage} highlight key={highestValueMessage.id.toString()}>
-        </Message>
+      <Message message={highestValueMessage} highlight key={highestValueMessage.id.toString()}>
+      </Message>
       <>
         {(otherMessages as MessageObject[]).map((message) =>
           <Message message={message} key={message.id.toString()}>
