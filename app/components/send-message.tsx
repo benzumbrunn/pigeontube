@@ -9,6 +9,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Toaster } from '@/components/ui/toaster';
 import { useToast } from '@/components/ui/use-toast';
+import reload from "@/public/reload.svg";
+import Image from 'next/image';
 
 declare global {
   interface Window { ethereum: any; web3: Web3; }
@@ -111,6 +113,12 @@ export default function SendMessage() {
         <Button onClick={handleClick} disabled={message.length === 0 || disabled}>
           Send
         </Button>
+        <Image
+          onClick={() => window.location.reload()}
+          className='w-7 cursor-pointer transition ease-in-out hover:rotate-180'
+          src={reload}
+          alt="Reload messages"
+        />
         <Toaster />
       </div>
     </>
