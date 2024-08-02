@@ -1,2 +1,2 @@
-export const CONTRACT_ADDRESS = '0x6Fa51D65A277EAd4FC3aC08564F62D07408f1F57';
+export const CONTRACT_ADDRESS = '0xA608966B353c0f1887AE87512256Cb5217DB400E';
 export const RPC_PROVIDER = 'https://dmc.mydefichain.com/mainnet';
