@@ -6,7 +6,7 @@ import { CONTRACT_ADDRESS } from '@/config';
 
 export default function MainNav() {
   const contractLink = "https://meta.defiscan.live/address/" + CONTRACT_ADDRESS;
-  const sourceLink = "https://github.com/benzumbrunn/pigeon"; // TODO: make public
+  const sourceLink = "https://github.com/benzumbrunn/pigeontube";
 
   return (
     <div className="flex flex-col items-center justify-between">
