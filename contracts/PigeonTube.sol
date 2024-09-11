@@ -42,6 +42,7 @@ contract PigeonTube {
         messages.push(message);
         // store address and value of current message for next higher value message
         previousHighestAddress.transfer(msg.value);
+        previousHighestAddress = payable(msg.sender);
         previousHighestAmount = msg.value;
 
         emit MessageSubmitted(message);
